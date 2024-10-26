@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Ticker Example</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+        }
+
+        /* Scrolling Ticker Styling */
+        .ticker {
+            background-color: #3aafa9;
+            color: white;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            height: 60px;
+            line-height: 60px; /* Center text vertically */
+            font-size: 1.2em;
+            border-bottom: 3px solid #2b7a78; /* Bottom border for emphasis */
+        }
+
+        .ticker span {
+            display: inline-block;
+            padding: 0 40px; /* Increase spacing here if needed */
+            animation: scroll 15s linear infinite; /* Adjust duration as needed */
+            transition: transform 0.3s ease; /* Smooth transition */
+            cursor: pointer; /* Change cursor on hover */
+        }
+
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        /* Main Content Container */
+        .container {
+            text-align: center;
+            padding: 40px 20px;
+            max-width: 800px; /* Max width for better readability */
+            margin: auto; /* Center container */
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+        }
+
+        /* Title Styling */
+        h1 {
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            color: #2b7a78;
+        }
+
+        /* Form Styling */
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+            width: calc(40% - 30px); /* Responsive width */
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #3aafa9;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #2b7a78; /* Darker shade on hover */
+        }
+
+        /* Back Button */
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #2b7a78;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            background-color: #3aafa9; /* Darker shade on hover */
+        }
+    </style>
+</head>
+<body>
+<!-- Scrolling Ticker -->
+<div class="ticker">
+    <span class="gain">📈 AAPL - Apple Inc.</span>
+    <span class="loss">📉 TSLA - Tesla Inc.</span>
+    <span class="gain">📈 AMZN - Amazon.com Inc.</span>
+    <span class="loss">📉 GOOGL - Alphabet Inc.</span>
+    <span class="gain">📈 MSFT - Microsoft Corporation</span>
+    <span class="gain">📈 FB - Meta Platforms Inc.</span>
+    <span class="loss">📉 NFLX - Netflix Inc.</span>
+    <span class="gain">📈 NVDA - NVIDIA Corporation</span>
+    <span class="loss">📉 DIS - The Walt Disney Company</span>
+    <span class="gain">📈 PYPL - PayPal Holdings, Inc.</span>
+    <span class="loss">📉 SNAP - Snap Inc.</span>
+    <span class="gain">📈 NFLX - Netflix Inc.</span>
+    <span class="loss">📉 ADBE - Adobe Inc.</span>
+    <span class="gain">📈 CRM - Salesforce.com, Inc.</span>
+    <span class="loss">📉 ORCL - Oracle Corporation</span>
+    <span class="gain">📈 PFE - Pfizer Inc.</span>
+    <span class="loss">📉 MRK - Merck & Co., Inc.</span>
+</div>
+
+
+<!-- Main Content -->
+<div class="container">
+    <h1>Welcome to the Stock Quote Finder</h1>
+    <form th:action="@{/quote-view}" method="get">
+        <label for="symbol">Enter Stock Symbol:</label>
+        <input type="text" id="symbol" name="symbol" placeholder="e.g., AAPL" required>
+        <input type="submit" value="Get Quote">
+    </form>
+</div>
+</body>
+</html>

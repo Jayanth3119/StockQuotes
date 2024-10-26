@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Quote</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        /* Main Container */
+        .container {
+            width: 90%;
+            max-width: 600px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Title Styling */
+        h1 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            color: #2b7a78;
+            text-align: center;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #3aafa9;
+            color: white;
+            text-transform: uppercase;
+            font-size: 0.9em;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f0f4f8;
+        }
+
+        td {
+            color: #333;
+            font-size: 1em;
+        }
+
+        /* Profit/Loss Colors */
+        .profit {
+            color: green;
+            font-weight: bold;
+        }
+
+        .loss {
+            color: red;
+            font-weight: bold;
+        }
+
+        /* Back Button */
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #2b7a78;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            background-color: #3aafa9;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Stock Quote for <span th:text="${symbol}">IBM</span></h1>
+
+    <table>
+        <tr>
+            <th>Key</th>
+            <th>Value</th>
+        </tr>
+        <tr th:each="entry : ${quoteData}">
+            <td th:text="${entry.key}">Key</td>
+
+            <!-- Conditionally apply profit/loss class -->
+            <td th:text="${entry.value}"
+                th:classappend="${entry.key == '09. change' or entry.key == '10. change percent'} ?
+                    (${entry.value.startsWith('-')} ? 'loss' : 'profit') : ''">
+                Value
+            </td>
+        </tr>
+    </table>
+
+    <!-- Back Link -->
+    <a href="/" class="back-link">Back to Search</a>
+</div>
+</body>
+</html>
